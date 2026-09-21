@@ -9,6 +9,8 @@
 #include <stdexcept>
 #include <climits>
 #include <cstdlib>
+#include <sys/time.h>
+#include <iomanip>
 
 struct Item
 {
@@ -43,14 +45,26 @@ class PmergeMe
     private:
         std::vector<int> _vector;
         std::deque<int> _deque;
+        double _vectorTime;
+        double _dequeTime;
 
         int parseNumber(const std::string& str) const;
+        double getTime() const;
+
         void fordJohnsonVector(std::vector<Item>& items);
-        void sortVector();
+        void sortVector(int argc, char **argv);
         Pair findPair(const std::vector<Pair>& pairs, size_t id) const;
-        std::vector<size_t> generateJacobsthalOrder(size_t pendingCount) const;
         size_t findPartner(const std::vector<Item>& chain, size_t id) const;
         size_t binarySearch(const std::vector<Item>& chain, const Item& item, size_t end) const;
+
+        void fordJohnsonDeque(std::deque<Item>& items);
+        void sortDeque(int argc, char **argv);
+        Pair findPairDeque(const std::deque<Pair>& pairs, size_t id) const;
+        size_t findPartnerDeque(const std::deque<Item>& chain, size_t id) const;
+        size_t binarySearchDeque(const std::deque<Item>& chain, const Item& item, size_t end) const;
+
+        std::vector<size_t> generateJacobsthalOrder(size_t pendingCount) const;
+        std::deque<size_t> generateJacobsthalOrderDeque(size_t pendingCount) const;
 
         template <typename T>
         void printContainer(const T& container,
@@ -75,9 +89,10 @@ class PmergeMe
         ~PmergeMe();
 
         void parseInput(int argc, char **argv);
-        void printBefore() const;
+        void printBefore(int argc, char **argv) const;
         void printAfter() const;
-        void sort();
+        void sort(int argc, char **argv);
+        void printTimes() const;
 };
 
 #endif

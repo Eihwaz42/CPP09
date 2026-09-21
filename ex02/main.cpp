@@ -13,16 +13,16 @@ int main(int argc, char **argv)
         PmergeMe sorter;
 
         sorter.parseInput(argc, argv);
-        sorter.printBefore();
-        sorter.sort();
+        sorter.printBefore(argc, argv);
+        sorter.sort(argc, argv);
         sorter.printAfter();
+        sorter.printTimes();
     }
     catch (const std::exception&)
     {
         std::cerr << "Error" << std::endl;
         return (1);
     }
-
 
     return (0);
 }
